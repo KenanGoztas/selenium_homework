@@ -8,14 +8,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utilities.Driver;
 
 import java.util.concurrent.TimeUnit;
 
-public class Alert {
+public class SeleniumHomework2 {
     WebDriver driver = Driver.getDriver();
     Actions actions = new Actions(driver);
 
