@@ -1,5 +1,6 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,9 @@ import java.util.concurrent.TimeUnit;
 public class SeleniumHomework2 {
     WebDriver driver = Driver.getDriver();
     Actions actions = new Actions(driver);
+    //Faker faker = new Faker();
+    String emailS= (new Faker()).internet().emailAddress();
+    String passwordS = (new Faker()).internet().password();
 
 //    https://courses.ultimateqa.com/
 //    internet sayfasına gidininiz.
@@ -41,11 +45,11 @@ public class SeleniumHomework2 {
     @AfterClass
     public void TearDown() {
 
-        //driver.quit();
+        driver.quit();
     }
 
     @Test
-    public void testCase1() {
+    public void testCase1()  {
         //steps
         //1 sign in'e tıklayın
         //2 checkboxun tıklanmamış olduğunu doğrulayın
@@ -60,8 +64,8 @@ public class SeleniumHomework2 {
         Assert.assertTrue(checkBox.isSelected()); //validation
     }
 
-    @Test
-    public void testCase2() {
+    @Test(dependsOnMethods = "testCase1")
+    public void falseLogin() {
        // steps
         // 1 yanlış mailinizi girin
         //2 yanlış şifrenizi girin
@@ -73,7 +77,7 @@ public class SeleniumHomework2 {
         actions.sendKeys(Keys.TAB + "1234").perform();
         WebElement button = driver.findElement(By.xpath("//button[@type='submit']"));
         //click ile submit arasındaki fark nedir??
-        button.submit();
+        button.click();
 
 
         WebElement error = driver.findElement(By.xpath("//li[@class='form-error__list-item']"));
@@ -81,8 +85,8 @@ public class SeleniumHomework2 {
         String expectedText = "Invalid email or password.";
         Assert.assertEquals(errorText, expectedText);
     }
-    @Test
-    public void testCase3() {
+    @Test(dependsOnMethods = "falseLogin")
+    public void newAccount() {
         //ekranı büyütmezsem yeni hesap açma buttonu çalışmıyor. daha önce büyütütm ama yine küçüldü
         driver.manage().window().fullscreen();
         WebElement createNewAccount = driver.findElement(By.partialLinkText("Create a new account"));
@@ -93,15 +97,39 @@ public class SeleniumHomework2 {
         firstName.sendKeys("Kenan");
         WebElement lastName = driver.findElement(By.xpath("//input[@id='user[last_name]']"));
         lastName.sendKeys("User");
+
+
         WebElement email = driver.findElement(By.xpath("//input[@id='user[email]']"));
-        email.sendKeys("user@example.com");
+        email.sendKeys(emailS);
         WebElement password = driver.findElement(By.xpath("//input[@id='user[password]']"));
-        password.sendKeys("user12345");
+        password.sendKeys(passwordS);
 
         WebElement terms = driver.findElement(By.xpath("//input[@id='user[terms]']"));
         terms.click();
         WebElement submit = driver.findElement(By.xpath("//button[@type='submit']"));
         submit.click();
+
+        WebElement loginValidation= driver.findElement(By.className("dropdown__toggle-button"));
+        System.out.println(loginValidation.getText());
+        Assert.assertEquals(loginValidation.getText(),"Kenan U");
+        WebElement logout1= driver.findElement(By.xpath("/html/body/header/div[2]/div/nav/ul/li[2]/button/i"));
+        logout1.click();
+        WebElement logout2= driver.findElement(By.partialLinkText("Sign Out"));
+        logout2.click();
+    }
+    @Test(dependsOnMethods = "newAccount")
+    public void login() {
+        WebElement sign_in = driver.findElement(By.linkText("Sign In"));
+        sign_in.click();
+        WebElement email = driver.findElement(By.xpath("//input[@type='email']"));
+        email.sendKeys(emailS);
+        actions.sendKeys(Keys.TAB + passwordS).perform();
+        WebElement button = driver.findElement(By.xpath("//button[@type='submit']"));
+        //click ile submit arasındaki fark nedir??
+        button.click();
+        WebElement loginValidation= driver.findElement(By.className("dropdown__toggle-button"));
+        System.out.println(loginValidation.getText());
+        Assert.assertEquals(loginValidation.getText(),"Kenan U");
 
     }
 

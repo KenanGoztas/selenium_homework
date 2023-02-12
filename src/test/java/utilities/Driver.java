@@ -67,7 +67,7 @@ public class Driver {
                     driver.manage().window().maximize();
                     break;
                 case "safari":
-                    if (!System.getProperty("os.name").toLowerCase().contains("mac"))
+                   if (!System.getProperty("os.name").toLowerCase().contains("mac"))
                         throw new WebDriverException("Your OS doesn't support Safari");
                     WebDriverManager.getInstance(SafariDriver.class).setup();
                     driver = new SafariDriver();
@@ -87,4 +87,8 @@ public class Driver {
             driver = null;
         }
     }
+    public static void wait(int seconds) throws InterruptedException {
+        Thread.sleep(seconds*1000);
+    }
+
 }
