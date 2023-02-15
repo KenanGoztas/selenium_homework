@@ -1,6 +1,7 @@
 package tests;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WindowType;
 import org.testng.annotations.Test;
 import utilities.Driver;
 import utilities.TestBase;
@@ -25,6 +26,22 @@ public class WindowHandle extends TestBase {
         for (String ha : handlesList) {
             System.out.println(ha);
         }
+
+        driver.switchTo().newWindow(WindowType.TAB);
+        driver.get("http://google.com");
+        driver.switchTo().newWindow(WindowType.WINDOW);
+        driver.get("http://google.com");
+
+        // Opens a new tab and switches to new tab
+        driver.switchTo().newWindow(WindowType.TAB);
+        // Opens a new window and switches to new window
+        driver.switchTo().newWindow(WindowType.WINDOW);
+        //Switch back to the old tab or window
+        driver.switchTo().window(driver.getWindowHandle());
+
+
+
+
 
 
 

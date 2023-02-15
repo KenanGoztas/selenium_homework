@@ -14,12 +14,13 @@ public class TestBase {
    protected WebDriver driver= Driver.getDriver();
     @BeforeMethod
     public void setUp() {
-        Driver.getDriver().get(ConfigReader.getProperty("projectUrl"));
+        //sabit bir link olduğunda burayı kullanacağız
+        //Driver.getDriver().get(ConfigReader.getProperty("projectUrl"));
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
     @AfterMethod
     public void tearDown() {
 
-        Driver.closeDriver();
+        //Driver.closeDriver();
     }
 }
