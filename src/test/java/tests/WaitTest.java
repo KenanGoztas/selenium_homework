@@ -20,7 +20,6 @@ public class WaitTest extends TestBase {
         // WebElement addButton = driver.findElement(By.xpath("//button[text()='Add']"));
         // addButton.click();
 
-        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(3));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Add']"))).click();
         // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Add']")));
 

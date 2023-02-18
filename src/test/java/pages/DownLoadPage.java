@@ -12,6 +12,8 @@ public class DownLoadPage {
     }
     @FindBy(linkText = "renamedFile.png")
     public WebElement downLoadButton;
+    @FindBy (xpath = "//a[text()='pexels-photo-323705.jpeg']")
+    public WebElement downloadButton;
 
 
 }

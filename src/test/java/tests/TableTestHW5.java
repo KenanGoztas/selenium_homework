@@ -1,6 +1,10 @@
 package tests;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
@@ -9,7 +13,6 @@ import utilities.TestBase;
 
 public class TableTestHW5 extends TestBase {
     TablePagesHomework5 tablepage = new TablePagesHomework5();
-
     //    Soru 1:
 //    Kullanıcı https://the-internet.herokuapp.com/tables sayfasına gider
 //    Kullanıcı Tablonun 4’üncü satır 5’üncü sütundaki verinin doğruluğunu kontrol
@@ -18,6 +21,7 @@ public class TableTestHW5 extends TestBase {
 
     @Test
     public void test1() throws InterruptedException {
+
         driver.get("https://the-internet.herokuapp.com/tables");
         String tr = tablepage.tr1x4x5.getText();
         String expectedValue = ("http://www.timconway.com");
@@ -47,6 +51,7 @@ public class TableTestHW5 extends TestBase {
             System.out.println(web.getText());
         }
         System.out.println("!!!!!");
+
         for (int i = 0; i < tablepage.tableList1.size(); i++) {
             Assert.assertEquals(tablepage.tableList1.get(i).getText(), tablepage.tableList2.get(i).getText());
         }

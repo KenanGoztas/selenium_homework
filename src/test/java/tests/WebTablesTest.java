@@ -3,6 +3,7 @@ package tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.TableTestPage;
 import utilities.Driver;
 import utilities.TestBase;
@@ -31,5 +32,10 @@ public class WebTablesTest extends TestBase {
         }
 
         System.out.println("=======================================================================");
+        SoftAssert softAssert= new SoftAssert();
+        softAssert.assertEquals("tableTest()", "tabelll");
+
+
+
     }
 }
