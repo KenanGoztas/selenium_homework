@@ -102,15 +102,17 @@ public class DragAndDropTest extends TestBase {
         //listenin içindeki 50'den büyük sayıları ayrı bir listeye ekledim
         List<Double> duesDolars2 = new ArrayList<>();
         for (Double d : duesDolars) {
-            if (d < 50)
+            if (d > 50)
                 duesDolars2.add(d);
         }
 
+        double expected=100.0;
         //foreach döngüsü ile istenen sayıyı bulup kontrol ettim..
         //burada if yapmadan doğrudan assert nasıl yapılablir????
         for (Double d : duesDolars2) {
-            if (d == 100.00)
-                Assert.assertEquals(d, "100.00");
+            System.out.println("d = " +d);
+            if (d == 100.0)
+                Assert.assertEquals(d, expected);
         }
 
     }
