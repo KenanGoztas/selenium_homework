@@ -114,6 +114,7 @@ public class DragAndDropTest extends TestBase {
             if (d == 100.0)
                 Assert.assertEquals(d, expected);
         }
+        Assert.assertTrue(duesDolars2.contains(expected));
 
     }
 }
